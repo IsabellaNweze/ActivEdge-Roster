@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -44,15 +45,16 @@ public class ActivEdge_Roster {
         Interns.put(27, "Anthony Obinugwu");
 
 
-        ArrayList<String> workDays = new ArrayList<>();
-        workDays.add("Monday");
-        workDays.add("Tuesday");
-        workDays.add("Wednesday");
-        workDays.add("Thursday");
-        workDays.add("Friday");
+//
+        List<String> days = new ArrayList<>();
+        days.add("Monday");
+        days.add("Tuesday");
+        days.add("Wednesday");
+        days.add("Thursday");
+        days.add("Friday");
 
-        function.StaffAssign(Staff,workDays);
-        function.InternAssign(Interns,workDays);
+        function.StaffAssign(Staff, (ArrayList<String>) days);
+       function.InternAssign(Interns, (ArrayList<String>) days);
 
     }
 }
