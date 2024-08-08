@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Map;
 
 public interface Functions {
-    public String  StaffAssign(Map<Integer,String> map);
-    public String InternAssign(Map<Integer,String> map);
+    public void  StaffAssign(Map<Integer,String> map, ArrayList<String> workdays);
+    public void InternAssign(Map<Integer,String> map,ArrayList<String> days);
 
+    public String RandomDays(ArrayList<String>days);
 
 }
