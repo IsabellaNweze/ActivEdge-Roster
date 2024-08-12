@@ -43,6 +43,7 @@ public class ActivEdge_Roster {
         Interns.put(25, "Nweze Isabella");
         Interns.put(26, "John Ozeigbe");
         Interns.put(27, "Anthony Obinugwu");
+        Interns.put(28, "Ikeyi Ijeamaka");
 
 
 //
@@ -54,7 +55,7 @@ public class ActivEdge_Roster {
         days.add("Friday");
 
         function.StaffAssign(Staff, (ArrayList<String>) days);
-       function.InternAssign(Interns, (ArrayList<String>) days);
+       //function.InternAssign(Interns, (ArrayList<String>) days);
 
     }
 }
