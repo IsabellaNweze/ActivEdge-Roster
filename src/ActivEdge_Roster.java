@@ -55,7 +55,7 @@ public class ActivEdge_Roster {
         days.add("Friday");
 
         function.StaffAssign(Staff, (ArrayList<String>) days);
-       //function.InternAssign(Interns, (ArrayList<String>) days);
+       function.InternAssign(Interns, (ArrayList<String>) days);
 
     }
 }
