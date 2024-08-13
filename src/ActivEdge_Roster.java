@@ -14,7 +14,7 @@ public class ActivEdge_Roster {
 
         Map<Integer, String> Staff = new HashMap<>(); // Creating Map for each member of the staff
         Staff.put(1, "Gbolahan Fatunde");
-        Staff.put(2, "Ademola Babatunde");
+        Staff.put(2, "Adedamola Babatunde");
         Staff.put(3, "Praise Akobundu");
         Staff.put(4, "Smart Agbawo");
         Staff.put(5, "Chioma Nwadozie");
