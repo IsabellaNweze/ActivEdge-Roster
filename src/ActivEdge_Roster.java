@@ -1,8 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -45,9 +42,6 @@ public class ActivEdge_Roster {
         Interns.put(27, "Anthony Obinugwu");
         Interns.put(28, "Ikeyi Ijeamaka");
 
-
-
-//
         List<String> days = new ArrayList<>(); // creating a List for each day of the week
         days.add("Monday");
         days.add("Tuesday");
@@ -56,7 +50,28 @@ public class ActivEdge_Roster {
         days.add("Friday");
 
         function.StaffAssign(Staff, (ArrayList<String>) days); // Calling the function of staff
-       function.InternAssign(Interns, (ArrayList<String>) days); // Calling the function of interns
+        function.InternAssign(Interns, (ArrayList<String>) days); // Calling the function of interns
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1. Add new staff member");
+        System.out.println("2. Add new intern");
+        System.out.println("3. Exit");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1:
+                function.addStaffMember((HashMap<Integer, String>) Staff, (ArrayList<String>) days);
+                break;
+            case 2:
+                function.addNewIntern((HashMap<Integer, String>) Interns, (ArrayList<String>) days);
+                break;
+            case 3:
+                System.out.println("Thank you for giving us work, Goodbye!");
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
     }
 }
+

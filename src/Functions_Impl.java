@@ -12,8 +12,8 @@ public class Functions_Impl implements Functions {
         // A for loop to iterate over each staff member in the map
         for (Integer key : map.keySet()) {
             Collections.shuffle(workdays);  // Using collections to shuffle the workdays to randomize the assignment
-            bucket.addAll(workdays.subList(0,2)); // Assign the first two days from the shuffled list to the bucket
-            for (String day :weekdays){
+            bucket.addAll(workdays.subList(0, 2)); // Assign the first two days from the shuffled list to the bucket
+            for (String day : weekdays) {
                 int count = Collections.frequency(bucket, day);
                 if (count >= 8) { // A for loop to check if any day in the bucket has been assigned up to 8 days
                     workdays.remove(day); // Command to remove output day
@@ -35,9 +35,9 @@ public class Functions_Impl implements Functions {
 
         for (Integer key : map.keySet()) { // A for loop to iterate over each intern in the map
             Collections.shuffle(days);  // Shuffle the available days to randomize the assignment
-            bucket1.addAll(days.subList(0,3)); // Assign the first three days from the shuffled list to the bucket
+            bucket1.addAll(days.subList(0, 3)); // Assign the first three days from the shuffled list to the bucket
 
-            for (String day :Weekdays){ // Check if any day in the bucket has been assigned up to 4 times
+            for (String day : Weekdays) { // Check if any day in the bucket has been assigned up to 4 times
                 int count = Collections.frequency(bucket1, day);
                 if (count >= 4) {
                     days.remove(day);
@@ -49,7 +49,23 @@ public class Functions_Impl implements Functions {
         }
     }
 
+    @Override
+    public void addStaffMember(HashMap<Integer, String> Staff, ArrayList<String> workdays) {
+        Scanner scanner = new Scanner(System.in);
+            int nextId = Staff.size() + 1;
+            System.out.println("Enter the new member's name:");
+            String newName = scanner.nextLine();
+            Staff.put(nextId, newName);
+            StaffAssign(Staff, workdays);
+        }
 
-
-
-}
+    @Override
+    public void addNewIntern(HashMap<Integer, String> Interns, ArrayList<String> days) {
+        Scanner scanner = new Scanner(System.in);
+            int nextId = Interns.size() + 1;
+            System.out.println("Enter the new member's name:");
+            String newName = scanner.nextLine();
+            Interns.put(nextId, newName);
+            StaffAssign(Interns, days);
+        }
+    }
