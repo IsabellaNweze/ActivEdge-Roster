@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class Functions_Impl implements Functions {
@@ -48,8 +49,4 @@ public class Functions_Impl implements Functions {
             System.out.println(map.get(key) + " office days are " + output); // Prints the intern's assigned days
         }
     }
-
-
-
-
 }
