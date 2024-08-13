@@ -10,9 +10,9 @@ import java.util.Map;
 public class ActivEdge_Roster {
     public static void main(String[] args)  {
 
-        Functions function = new Functions_Impl();
+        Functions function = new Functions_Impl(); // Assigning the functions_impl (Functions implementation) class to a new name called functions
 
-        Map<Integer, String> Staff = new HashMap<>();
+        Map<Integer, String> Staff = new HashMap<>(); // Creating Map for each member of the staff
         Staff.put(1, "Gbolahan Fatunde");
         Staff.put(2, "Ademola Babatunde");
         Staff.put(3, "Praise Akobundu");
@@ -34,7 +34,7 @@ public class ActivEdge_Roster {
         Staff.put(19, "Christian Aka");
         Staff.put(20, "Amietubodie Otonye ");
 
-        Map<Integer, String> Interns = new HashMap<>();
+        Map<Integer, String> Interns = new HashMap<>(); // creating a map for each intern
 
         Interns.put(21, "Siyaka Promise");
         Interns.put(22, "Kanu Kennedy");
@@ -46,16 +46,17 @@ public class ActivEdge_Roster {
         Interns.put(28, "Ikeyi Ijeamaka");
 
 
+
 //
-        List<String> days = new ArrayList<>();
+        List<String> days = new ArrayList<>(); // creating a List for each day of the week
         days.add("Monday");
         days.add("Tuesday");
         days.add("Wednesday");
         days.add("Thursday");
         days.add("Friday");
 
-        function.StaffAssign(Staff, (ArrayList<String>) days);
-       function.InternAssign(Interns, (ArrayList<String>) days);
+        function.StaffAssign(Staff, (ArrayList<String>) days); // Calling the function of staff
+       function.InternAssign(Interns, (ArrayList<String>) days); // Calling the function of interns
 
     }
 }
