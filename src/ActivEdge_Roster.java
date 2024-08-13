@@ -1,17 +1,20 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class ActivEdge_Roster {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
-        Map<Integer, String> Staff = new HashMap<>();
+        Functions function = new Functions_Impl(); // Assigning the functions_impl (Functions implementation) class to a new name called functions
+
+        Map<Integer, String> Staff = new HashMap<>(); // Creating Map for each member of the staff
         Staff.put(1, "Gbolahan Fatunde");
-        Staff.put(2, "Ademola Babatunde");
+        Staff.put(2, "Adedamola Babatunde");
         Staff.put(3, "Praise Akobundu");
         Staff.put(4, "Smart Agbawo");
         Staff.put(5, "Chioma Nwadozie");
@@ -31,7 +34,7 @@ public class ActivEdge_Roster {
         Staff.put(19, "Christian Aka");
         Staff.put(20, "Amietubodie Otonye ");
 
-        Map<Integer, String> Interns = new HashMap<>();
+        Map<Integer, String> Interns = new HashMap<>(); // creating a map for each intern
 
         Interns.put(21, "Siyaka Promise");
         Interns.put(22, "Kanu Kennedy");
@@ -40,13 +43,20 @@ public class ActivEdge_Roster {
         Interns.put(25, "Nweze Isabella");
         Interns.put(26, "John Ozeigbe");
         Interns.put(27, "Anthony Obinugwu");
+        Interns.put(28, "Ikeyi Ijeamaka");
 
 
-        ArrayList<String> workDays = new ArrayList<>();
-        workDays.add("Monday");
-        workDays.add("Tuesday");
-        workDays.add("Wednesday");
-        workDays.add("Thursday");
-        workDays.add("Friday");
+
+//
+        List<String> days = new ArrayList<>(); // creating a List for each day of the week
+        days.add("Monday");
+        days.add("Tuesday");
+        days.add("Wednesday");
+        days.add("Thursday");
+        days.add("Friday");
+
+        function.StaffAssign(Staff, (ArrayList<String>) days); // Calling the function of staff
+       function.InternAssign(Interns, (ArrayList<String>) days); // Calling the function of interns
+
     }
 }
