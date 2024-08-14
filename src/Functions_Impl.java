@@ -49,7 +49,6 @@ public class Functions_Impl implements Functions {
             System.out.println(map.get(key) + " office days are " + output); // Prints the intern's assigned days
         }
     }
-<<<<<<< HEAD
 
     @Override
     public void addStaffMember(HashMap<Integer, String> Staff, ArrayList<String> workdays) {
@@ -70,7 +69,32 @@ public class Functions_Impl implements Functions {
             Interns.put(nextId, newName);
             StaffAssign(Interns, days);
         }
+
+    @Override
+    public void assignJohn(Map<Integer, String> john, ArrayList<String> nyscSet1) {
+        ArrayList<String> bucket2 = new ArrayList<>();
+
+        for (Integer key : john.keySet()) {
+            Collections.shuffle(nyscSet1);
+            bucket2.addAll(nyscSet1.subList(0, 3));
+
+            String output = bucket2.toString().replace("[", "").replace("]", "");
+            System.out.println(john.get(key) + " office days are " + output);
+
+        }
     }
-=======
+
+    @Override
+    public void assignCorpers(Map<Integer, String> corpers, ArrayList<String> nyscSet2) {
+
+        for (Integer key : corpers.keySet()) {
+            ArrayList<String> bucket3 = new ArrayList<>();
+            Collections.shuffle(nyscSet2);
+            bucket3.addAll(nyscSet2.subList(0, 3));
+
+            String output = bucket3.toString().replace("[", "").replace("]", "");
+            System.out.println(corpers.get(key) + " office days are " + output);
+
+        }
+    }
 }
->>>>>>> 64253e5cab5f76087c3bfc73c5d68c0e2438ed64
