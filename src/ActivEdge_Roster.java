@@ -8,7 +8,8 @@ public class ActivEdge_Roster {
     public static void main(String[] args)  {
 
         Functions function = new Functions_Impl(); // Assigning the functions_impl (Functions implementation) class to a new name called functions
-
+        Staff person = new Staff();
+       // person.setFirstname(rs.getString);
         Map<Integer, String> Staff = new HashMap<>(); // Creating Map for each member of the staff
         Staff.put(1, "Gbolahan Fatunde");
         Staff.put(2, "Adedamola Babatunde");
