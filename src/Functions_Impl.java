@@ -49,7 +49,6 @@ public class Functions_Impl implements Functions {
             System.out.println(map.get(key) + " office days are " + output); // Prints the intern's assigned days
         }
     }
-<<<<<<< HEAD
 
     @Override
     public void addStaffMember(HashMap<Integer, String> Staff, ArrayList<String> workdays) {
@@ -71,6 +70,6 @@ public class Functions_Impl implements Functions {
             StaffAssign(Interns, days);
         }
     }
-=======
-}
->>>>>>> 64253e5cab5f76087c3bfc73c5d68c0e2438ed64
+
+
+
