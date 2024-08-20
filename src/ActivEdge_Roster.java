@@ -10,27 +10,27 @@ public class ActivEdge_Roster {
         Functions function = new Functions_Impl(); // Assigning the functions_impl (Functions implementation) class to a new name called functions
         Staff person = new Staff();
        // person.setFirstname(rs.getString);
-        Map<Integer, String> Staff = new HashMap<>(); // Creating Map for each member of the staff
-        Staff.put(1, "Gbolahan Fatunde");
-        Staff.put(2, "Adedamola Babatunde");
-        Staff.put(3, "Praise Akobundu");
-        Staff.put(4, "Smart Agbawo");
-        Staff.put(5, "Chioma Nwadozie");
-        Staff.put(6, "Sodeeq Taiwo");
-        Staff.put(7, "Collins Eze");
-        Staff.put(8, "Delight Emmanuel");
-        Staff.put(9, "Adewale Favour");
-        Staff.put(10, "Hammed Mudashir");
-        Staff.put(11, "Thompson Idowu");
-        Staff.put(12, "Ekwugha Elochukwu");
-        Staff.put(13, "Salako Akinbolade");
-        Staff.put(14, "Ichebadu Chukwu");
-        Staff.put(15, "Ajah Kenneth");
-        Staff.put(16, "Onakoya Kayode");
-        Staff.put(17, "Jennifer Ewuzie");
-        Staff.put(18, "Miracle Shaibu");
-        Staff.put(19, "Christian Aka");
-        Staff.put(20, "Amietubodie Otonye ");
+        Map<Integer, String> staff = new HashMap<>(); // Creating Map for each member of the staff
+//        Staff.put(1, "Gbolahan Fatunde");
+//        Staff.put(2, "Adedamola Babatunde");
+//        Staff.put(3, "Praise Akobundu");
+//        Staff.put(4, "Smart Agbawo");
+//        Staff.put(5, "Chioma Nwadozie");
+//        Staff.put(6, "Sodeeq Taiwo");
+//        Staff.put(7, "Collins Eze");
+//        Staff.put(8, "Delight Emmanuel");
+//        Staff.put(9, "Adewale Favour");
+//        Staff.put(10, "Hammed Mudashir");
+//        Staff.put(11, "Thompson Idowu");
+//        Staff.put(12, "Ekwugha Elochukwu");
+//        Staff.put(13, "Salako Akinbolade");
+//        Staff.put(14, "Ichebadu Chukwu");
+//        Staff.put(15, "Ajah Kenneth");
+//        Staff.put(16, "Onakoya Kayode");
+//        Staff.put(17, "Jennifer Ewuzie");
+//        Staff.put(18, "Miracle Shaibu");
+//        Staff.put(19, "Christian Aka");
+//        Staff.put(20, "Amietubodie Otonye ");
 
         Map<Integer, String> Interns = new HashMap<>(); // creating a map for each intern
 
@@ -50,7 +50,7 @@ public class ActivEdge_Roster {
         days.add("Thursday");
         days.add("Friday");
 
-        function.StaffAssign(Staff, (ArrayList<String>) days); // Calling the function of staff
+        function.StaffAssign(staff, (ArrayList<String>) days); // Calling the function of staff
         function.InternAssign(Interns, (ArrayList<String>) days); // Calling the function of interns
 
         Scanner scanner = new Scanner(System.in);
@@ -61,7 +61,7 @@ public class ActivEdge_Roster {
         scanner.nextLine();
         switch (choice) {
             case 1:
-                function.addStaffMember((HashMap<Integer, String>) Staff, (ArrayList<String>) days);
+                function.addStaffMember((HashMap<Integer, String>) staff, (ArrayList<String>) days);
                 break;
             case 2:
                 function.addNewIntern((HashMap<Integer, String>) Interns, (ArrayList<String>) days);
