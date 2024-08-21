@@ -1,5 +1,9 @@
 
 import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Functions_Impl implements Functions {
 
@@ -69,7 +73,15 @@ public class Functions_Impl implements Functions {
             Interns.put(nextId, newName);
             StaffAssign(Interns, days);
         }
+
+    @Override
+    public void mapStaffRoles(HashMap<Integer, String> staffMap, HashMap<Integer, String> corperMap, HashMap<Integer, String> internMap) {
+
+
+
+
     }
+}
 
 
 

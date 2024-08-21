@@ -73,6 +73,11 @@ public class ActivEdge_Roster {
                 System.out.println("Invalid choice.");
                 break;
         }
+        HashMap<Integer, String> staffMap = new HashMap<>();
+        HashMap<Integer, String> corperMap = new HashMap<>();
+        HashMap<Integer, String> internMap = new HashMap<>();
+
+        function.mapStaffRoles(staffMap, corperMap, internMap);
     }
 }
 

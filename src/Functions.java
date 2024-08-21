@@ -12,4 +12,6 @@ public interface Functions { // Created an interface to handle functions class
     void addStaffMember(HashMap<Integer, String> Staff, ArrayList<String> workdays);
 
     void addNewIntern(HashMap<Integer, String> Staff, ArrayList<String> workdays);
+
+    void mapStaffRoles(HashMap<Integer, String> staffMap, HashMap<Integer, String> corperMap, HashMap<Integer, String> internMap);
 }
