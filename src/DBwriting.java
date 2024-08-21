@@ -1,11 +1,14 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.sql.PreparedStatement;
 public class DBwriting {
-    Staffdata staff1 = new Staffdata();
-    Interndata intern1 = new Interndata();
+    StaffData staffData = new StaffData();
+    Staff person = new Staff();
 
-    Corperdata corper1 = new Corperdata();
+    List<Staff> StaffList = new ArrayList<>();
+
     PreparedStatement preparedStatement = null;
     Connection con =null;
     String fName  = "";
@@ -24,62 +27,15 @@ public class DBwriting {
 
 
             String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
-
-
             preparedStatement = con.prepareStatement(sql);
 
-    for(int i=1;i<=19;i++) {
-        Map<Integer, String> staffDetails = staff1.getStaffDetails();
-        String[] s = staffDetails.get(i).split(" ");
 
-        if(!(s.length <2)){
-            fName = s[0];
-            lName = s[1];
+            for(Staff staff: staffData.getStaffs()) {
 
-        }
-        preparedStatement.setInt(1, i);
-        preparedStatement.setString(2, fName);
-        preparedStatement.setString(3, lName);
-        preparedStatement.setString(4, "STAFF");
-        int rowsInserted = preparedStatement.executeUpdate();
-
-        if (rowsInserted > 0) {
-            System.out.println("A new staff member was inserted successfully!");
-        }
-    }
-
-     for(int i=20;i<=23;i++) {
-         Map<Integer, String> internDetails = intern1.getInternDetails();
-         String[] s = internDetails.get(i).split(" ");
-
-                if(!(s.length <2)){
-                    fName = s[0];
-                    lName = s[1];
-
-                }
-                preparedStatement.setInt(1, i);
-                preparedStatement.setString(2, fName);
-                preparedStatement.setString(3, lName);
-                preparedStatement.setString(4, "INTERN");
-                int rowsInserted = preparedStatement.executeUpdate();
-
-                if (rowsInserted > 0) {
-                    System.out.println("A new staff member was inserted successfully!");
-                }
-            }
-        for(int i=24;i<=27;i++) {
-                Map<Integer, String> corperDetails = corper1.getCorpersDetails();
-                String[] s = corperDetails.get(i).split(" ");
-
-                if(!(s.length <2)){
-                    fName = s[0];
-                    lName = s[1];
-
-                }
-                preparedStatement.setInt(1, i);
-                preparedStatement.setString(2, fName);
-                preparedStatement.setString(3, lName);
-                preparedStatement.setString(4, "CORPER");
+                preparedStatement.setInt(1, staff.getId());
+                preparedStatement.setString(2, staff.getFirstname());
+                preparedStatement.setString(3, staff.getLastname());
+                preparedStatement.setString(4, staff.getRole().name());
                 int rowsInserted = preparedStatement.executeUpdate();
 
                 if (rowsInserted > 0) {
@@ -87,9 +43,16 @@ public class DBwriting {
                 }
             }
 
-
-
-
+            Statement stat = con.createStatement();
+            ResultSet rs = stat.executeQuery("SELECT * FROM STAFF");
+            while(rs.next()){
+                person.setId(rs.getInt(1));
+                person.setFirstname(rs.getString(2));
+                person.setLastname(rs.getString(3));
+                person.setRole(Roles.valueOf(rs.getString(4)));
+;
+                StaffList.add(person);
+            }
 
 
         } catch (SQLException e) {
