@@ -6,9 +6,13 @@ import java.util.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class ActivEdge_Roster {
     public static void main(String[] args)  {
+        DBWriting write =  new DBWriting();
+        write.createConnection();
+        write.writeToDatabase();
+        write.readFromDatabase();
 
         Functions function = new Functions_Impl();
-    DBwriting list = new DBwriting();
+        //DBwriting list = new DBwriting();
         List<String> workdays = new ArrayList<>();
         workdays.add("Monday");
         workdays.add("Tuesday");
@@ -16,8 +20,8 @@ public class ActivEdge_Roster {
         workdays.add("Thursday");
         workdays.add("Friday");
 
-        function.StaffAssign(list.StaffList, (ArrayList<String>) workdays);
-        function.InternAssign(list.StaffList, (ArrayList<String>) workdays);
+        function.StaffAssign(write.StaffList, workdays);
+        function.InternAssign(write.StaffList, workdays);
 
 
     }

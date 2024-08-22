@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class Functions_Impl implements Functions {
 
     @Override
-    public void StaffAssign(List<Staff> StaffList, ArrayList<String> workdays) {
+    public void StaffAssign(List<Staff> StaffList, List<String> workdays) {
 
         List<String> bucket = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class Functions_Impl implements Functions {
     }
 
     @Override
-    public void InternAssign(List<Staff> StaffList, ArrayList<String> days) {
+    public void InternAssign(List<Staff> StaffList, List<String> days) {
         List<String> bucket = new ArrayList<>();
 
         for (Staff staff : StaffList) {
@@ -39,23 +39,27 @@ public class Functions_Impl implements Functions {
                 Collections.shuffle(days);
                 bucket.addAll(days.subList(0, 3));
 
+                List<String> daysToRemove = new ArrayList<>();
                 for (String day : days) {
                     int count = Collections.frequency(bucket, day);
                     if (count >= 4) {
-                        days.remove(day);
+                        daysToRemove.add(day); // Mark the day for removal
                     }
                 }
+
+                // Remove the marked days after the loop
+                days.removeAll(daysToRemove);
 
                 List<String> sublist = days.subList(0, 3);
                 String output = sublist.toString().replace("[", "").replace("]", ""); // Remove square brackets from days output
                 System.out.println(staff.getFirstname() + " " + staff.getLastname() + "'s office days are " + output);
             }
         }
-
     }
 
+
     @Override
-    public void addStaffMember(List<Staff> StaffList, ArrayList<String> workdays) {
+    public void addStaffMember(List<Staff> StaffList, List<String> workdays) {
         Scanner scanner = new Scanner(System.in);
             //int nextId = Staff.size() + 1;
             System.out.println("Enter the new member's name:");
@@ -65,7 +69,7 @@ public class Functions_Impl implements Functions {
         }
 
     @Override
-    public void addNewIntern(List<Staff> StaffList, ArrayList<String> days) {
+    public void addNewIntern(List<Staff> StaffList, List<String> days) {
         Scanner scanner = new Scanner(System.in);
             //int nextId = Interns.size() + 1;
             System.out.println("Enter the new member's name:");
