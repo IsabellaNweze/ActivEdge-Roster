@@ -9,7 +9,7 @@ public interface Functions { // Created an interface to handle functions class
 
     void InternAssign(List<Staff> StaffList, List<String> days);
 
-    void addStaffMember();
+    void addStaffMember(DBWriting writer);
 
     //void addNewIntern(List<Staff> StaffList, List<String> workdays);
 

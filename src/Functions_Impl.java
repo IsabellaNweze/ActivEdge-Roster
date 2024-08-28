@@ -6,56 +6,63 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Functions_Impl implements Functions {
-    DBWriting Write = new DBWriting();
+    //Random random = new Random();
 
     @Override
     public void StaffAssign(List<Staff> StaffList, List<String> workdays) {
-        List<String> bucket = new ArrayList<>();
-        for (Staff staff : StaffList){
-            if(staff.getRole().name().equals("STAFF")){
-                Collections.shuffle(workdays);
-                bucket.addAll(workdays.subList(0,2));
-                for (String day :workdays){
-                    int count = Collections.frequency(bucket, day);
-                    if (count >= 8) { // Check if any day in the bucket has been assigned up to 8 times
-                        workdays.remove(day); // Remove the day if it has been assigned 8 times
-                    }
-                }
-                List<String> sublist = workdays.subList(0, 2);
-                String output = sublist.toString().replace("[", "").replace("]", "");
-                System.out.println(staff.getFirstname() + " " + staff.getLastname() + "'s office days are " + output);
-            }
+        Map<String, Integer> dayCount = new HashMap<>();
+        for (String day : workdays) {
+            dayCount.put(day, 0);
         }
 
+        for (Staff staff : StaffList) {
+            if (staff.getRole().name().equals("STAFF")) {
+                List<String> availableDays = new ArrayList<>(workdays);
+                Collections.shuffle(availableDays);
+
+                List<String> assignedDays = new ArrayList<>();
+                for (String day : availableDays) {
+                    if (dayCount.get(day) < 8 && assignedDays.size() < 2) {
+                        assignedDays.add(day);
+                        dayCount.put(day, dayCount.get(day) + 1);
+                    }
+                }
+
+                System.out.println(staff.getFirstname() + " " + staff.getLastname() + " is assigned to work on: "
+                        + assignedDays.get(0) + " and " + assignedDays.get(1));
+
+            }
+     }
     }
 
     @Override
     public void InternAssign(List<Staff> StaffList, List<String> days) {
-        List<String> bucket = new ArrayList<>();
+        Map<String, Integer> dayCount = new HashMap<>();
+        for (String day : days) {
+            dayCount.put(day, 0);
+        }
 
         for (Staff staff : StaffList) {
             if (staff.getRole().name().equals("INTERN")) {
-                Collections.shuffle(days);
-                bucket.addAll(days.subList(0, 3));
+                List<String> availableDays = new ArrayList<>(days);
+                Collections.shuffle(availableDays);
 
-                List<String> daysToRemove = new ArrayList<>();
-                for (String day : days) {
-                    int count = Collections.frequency(bucket, day);
-                    if (count >= 4) {
-                        daysToRemove.add(day); // Mark the day for removal
+                List<String> assignedDays = new ArrayList<>();
+                for (String day : availableDays) {
+                    if (dayCount.get(day) < 4 && assignedDays.size() < 3) {
+                        assignedDays.add(day);
+                        dayCount.put(day, dayCount.get(day) + 1);
                     }
                 }
-                days.removeAll(daysToRemove);
-                List<String> sublist = days.subList(0, 3);
-                String output = sublist.toString().replace("[", "").replace("]", ""); // Remove square brackets from days output
-                System.out.println(staff.getFirstname() + " " + staff.getLastname() + "'s office days are " + output);
+
+                System.out.println(staff.getFirstname() + " " + staff.getLastname() + " is assigned to work on: "
+                        + assignedDays.get(0) + " ," + assignedDays.get(1) + " and " + assignedDays.get(2) );
             }
         }
     }
 
-
     @Override
-    public void addStaffMember() {
+    public void addStaffMember(DBWriting writer) {
         StaffData staffData = new StaffData();  // Assuming this gets the existing list of staffs
        //staffData.getStaffs().add(newStaff);
 
@@ -83,7 +90,7 @@ public class Functions_Impl implements Functions {
         staffData.getStaffs().add(newStaff);
 
         // Write the updated list to the database
-        Write.writeToDatabase();
+        writer.writeToDatabase();
 
         System.out.println("New staff member added successfully!");
         }
