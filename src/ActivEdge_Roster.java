@@ -10,6 +10,7 @@ public class ActivEdge_Roster {
         write.createConnection();
         write.writeToDatabase();
         write.readFromDatabase();
+        write.closeConnection();
 
         Functions function = new Functions_Impl();
         //DBwriting list = new DBwriting();
@@ -22,6 +23,7 @@ public class ActivEdge_Roster {
 
         function.StaffAssign(write.StaffList, workdays);
         function.InternAssign(write.StaffList, workdays);
+        function.addStaffMember();
 
 
     }

@@ -19,9 +19,30 @@ public class DBWriting {
         }
     }
 
-    // 2. Method to write data to the database
+    // 2. Method to clear the table before writing new data
+    void clearTable() {
+        Statement stat = null;
+        try {
+            stat = con.createStatement();
+            String sql = "DELETE FROM STAFF";
+            stat.executeUpdate(sql);
+            System.out.println("Table cleared successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) stat.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // 3. Method to write data to the database
     void writeToDatabase() {
         try {
+            clearTable(); // Clear the table before inserting new data
+
             String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
             preparedStatement = con.prepareStatement(sql);
 
@@ -47,7 +68,7 @@ public class DBWriting {
         }
     }
 
-    // 3. Method to read data from the database
+    // 4. Method to read data from the database
     void readFromDatabase() {
         Statement stat = null;
         ResultSet rs = null;
@@ -77,7 +98,7 @@ public class DBWriting {
         }
     }
 
-    // 4. Method to close the connection
+    // 5. Method to close the connection
     void closeConnection() {
         try {
             if (con != null) con.close();
@@ -86,15 +107,5 @@ public class DBWriting {
         }
     }
 
-    public static void main(String[] args) {
-        DBWriting dbWriting = new DBWriting();
-        dbWriting.createConnection(); // Establish connection
 
-        dbWriting.writeToDatabase(); // Write data to the database
-        dbWriting.readFromDatabase(); // Read data from the database
-
-        // Process the data in StaffList if needed...
-
-        dbWriting.closeConnection(); // Close the connection
-    }
 }

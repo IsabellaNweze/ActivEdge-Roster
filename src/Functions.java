@@ -9,9 +9,9 @@ public interface Functions { // Created an interface to handle functions class
 
     void InternAssign(List<Staff> StaffList, List<String> days);
 
-    void addStaffMember(List<Staff> StaffList, List<String> workdays);
+    void addStaffMember();
 
-    void addNewIntern(List<Staff> StaffList, List<String> workdays);
+    //void addNewIntern(List<Staff> StaffList, List<String> workdays);
 
 
 }

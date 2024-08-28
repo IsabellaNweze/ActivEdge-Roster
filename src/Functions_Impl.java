@@ -6,12 +6,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Functions_Impl implements Functions {
+    DBWriting Write = new DBWriting();
 
     @Override
     public void StaffAssign(List<Staff> StaffList, List<String> workdays) {
-
         List<String> bucket = new ArrayList<>();
-
         for (Staff staff : StaffList){
             if(staff.getRole().name().equals("STAFF")){
                 Collections.shuffle(workdays);
@@ -46,10 +45,7 @@ public class Functions_Impl implements Functions {
                         daysToRemove.add(day); // Mark the day for removal
                     }
                 }
-
-                // Remove the marked days after the loop
                 days.removeAll(daysToRemove);
-
                 List<String> sublist = days.subList(0, 3);
                 String output = sublist.toString().replace("[", "").replace("]", ""); // Remove square brackets from days output
                 System.out.println(staff.getFirstname() + " " + staff.getLastname() + "'s office days are " + output);
@@ -59,24 +55,40 @@ public class Functions_Impl implements Functions {
 
 
     @Override
-    public void addStaffMember(List<Staff> StaffList, List<String> workdays) {
+    public void addStaffMember() {
+        StaffData staffData = new StaffData();  // Assuming this gets the existing list of staffs
+       //staffData.getStaffs().add(newStaff);
+
         Scanner scanner = new Scanner(System.in);
-            //int nextId = Staff.size() + 1;
-            System.out.println("Enter the new member's name:");
-            String newName = scanner.nextLine();
-            //Staff.put(nextId, newName);
-            StaffAssign(StaffList, workdays);
+
+        // Get user input for the staff member details
+        System.out.print("Enter ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+
+        System.out.print("Enter First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter Role (STAFF, INTERN, CORPER): ");
+        String roleInput = scanner.nextLine();
+        Roles role = Roles.valueOf(roleInput.toUpperCase());
+
+        // Create a new Staff object with user input
+        Staff newStaff = new Staff(id, firstName, lastName, role);
+
+        // Add the new staff member to the list
+        staffData.getStaffs().add(newStaff);
+
+        // Write the updated list to the database
+        Write.writeToDatabase();
+
+        System.out.println("New staff member added successfully!");
         }
 
-    @Override
-    public void addNewIntern(List<Staff> StaffList, List<String> days) {
-        Scanner scanner = new Scanner(System.in);
-            //int nextId = Interns.size() + 1;
-            System.out.println("Enter the new member's name:");
-            String newName = scanner.nextLine();
-            //Interns.put(nextId, newName);
-            //StaffAssign(Interns, days);
-        }
+
 
 
 }
