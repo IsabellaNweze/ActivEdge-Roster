@@ -1,100 +1,102 @@
 
 import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Functions_Impl implements Functions {
+    //Random random = new Random();
 
     @Override
-    public void StaffAssign(Map<Integer, String> map, ArrayList<String> workdays) {
+    public void StaffAssign(List<Staff> StaffList, List<String> workdays) {
+        Map<String, Integer> dayCount = new HashMap<>();
+        for (String day : workdays) {
+            dayCount.put(day, 0);
+        }
 
-        // Create a bucket to keep track of assigned days and a list for all weekdays
-        ArrayList<String> bucket = new ArrayList<>();
-        ArrayList<String> weekdays = new ArrayList<>();
+        for (Staff staff : StaffList) {
+            if (staff.getRole().name().equals("STAFF")) {
+                List<String> availableDays = new ArrayList<>(workdays);
+                Collections.shuffle(availableDays);
 
-        // A for loop to iterate over each staff member in the map
-        for (Integer key : map.keySet()) {
-            Collections.shuffle(workdays);  // Using collections to shuffle the workdays to randomize the assignment
-            bucket.addAll(workdays.subList(0, 2)); // Assign the first two days from the shuffled list to the bucket
-            for (String day : weekdays) {
-                int count = Collections.frequency(bucket, day);
-                if (count >= 8) { // A for loop to check if any day in the bucket has been assigned up to 8 days
-                    workdays.remove(day); // Command to remove output day
+                List<String> assignedDays = new ArrayList<>();
+                for (String day : availableDays) {
+                    if (dayCount.get(day) < 8 && assignedDays.size() < 2) {
+                        assignedDays.add(day);
+                        dayCount.put(day, dayCount.get(day) + 1);
+                    }
                 }
-            }
 
-            List<String> sublist = workdays.subList(0, 2);
-            String output = sublist.toString().replace("[", "").replace("]", ""); // Using .toString and .replace to remove square brackets from days output
-            System.out.println(map.get(key) + " office days are " + output); // Prints the staff member's and their assigned days
-        }
+                System.out.println(STR."\{staff.getFirstname()} \{staff.getLastname()} is assigned to work on: \{assignedDays.get(0)} and \{assignedDays.get(1)}");
+
+            }
+     }
     }
 
     @Override
-    public void InternAssign(Map<Integer, String> map, ArrayList<String> days) {
+    public void InternAssign(List<Staff> StaffList, List<String> days) {
+        Map<String, Integer> dayCount = new HashMap<>();
+        for (String day : days) {
+            dayCount.put(day, 0);
+        }
 
-        // Same as StaffAssign, but assigns 3 days and uses a different max amount of days
-        ArrayList<String> bucket1 = new ArrayList<>();
-        ArrayList<String> Weekdays = new ArrayList<>();
+        for (Staff staff : StaffList) {
+            if (staff.getRole().name().equals("INTERN")) {
+                List<String> availableDays = new ArrayList<>(days);
+                Collections.shuffle(availableDays);
 
-        for (Integer key : map.keySet()) { // A for loop to iterate over each intern in the map
-            Collections.shuffle(days);  // Shuffle the available days to randomize the assignment
-            bucket1.addAll(days.subList(0, 3)); // Assign the first three days from the shuffled list to the bucket
-
-            for (String day : Weekdays) { // Check if any day in the bucket has been assigned up to 4 times
-                int count = Collections.frequency(bucket1, day);
-                if (count >= 4) {
-                    days.remove(day);
+                List<String> assignedDays = new ArrayList<>();
+                for (String day : availableDays) {
+                    if (dayCount.get(day) < 4 && assignedDays.size() < 3) {
+                        assignedDays.add(day);
+                        dayCount.put(day, dayCount.get(day) + 1);
+                    }
                 }
+
+                System.out.println(STR."\{staff.getFirstname()} \{staff.getLastname()} is assigned to work on: \{assignedDays.get(0)} ,\{assignedDays.get(1)} and \{assignedDays.get(2)}");
             }
-            List<String> sublist = days.subList(0, 3);
-            String output = sublist.toString().replace("[", "").replace("]", ""); // Using .toString and .replace to remove square brackets from days output
-            System.out.println(map.get(key) + " office days are " + output); // Prints the intern's assigned days
         }
     }
 
     @Override
-    public void addStaffMember(HashMap<Integer, String> Staff, ArrayList<String> workdays) {
+    public void addStaffMember(DBWriting writer) {
+        StaffData staffData = new StaffData();  // Assuming this gets the existing list of staffs
+       //staffData.getStaffs().add(newStaff);
+
         Scanner scanner = new Scanner(System.in);
-            int nextId = Staff.size() + 1;
-            System.out.println("Enter the new member's name:");
-            String newName = scanner.nextLine();
-            Staff.put(nextId, newName);
-            StaffAssign(Staff, workdays);
+
+        // Get user input for the staff member details
+        System.out.print("Enter ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+
+        System.out.print("Enter First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter Role (STAFF, INTERN, CORPER): ");
+        String roleInput = scanner.nextLine();
+        Roles role = Roles.valueOf(roleInput.toUpperCase());
+
+        // Create a new Staff object with user input
+        Staff newStaff = new Staff(id, firstName, lastName, role);
+
+        // Add the new staff member to the list
+        //staffData.getStaffs().add(newStaff);
+
+        writer.writeToDatabase( newStaff);
+
+        System.out.println("New staff member added successfully!");
         }
-
-    @Override
-    public void addNewIntern(HashMap<Integer, String> Interns, ArrayList<String> days) {
-        Scanner scanner = new Scanner(System.in);
-            int nextId = Interns.size() + 1;
-            System.out.println("Enter the new member's name:");
-            String newName = scanner.nextLine();
-            Interns.put(nextId, newName);
-            StaffAssign(Interns, days);
-        }
-
-    @Override
-    public void assignJohn(Map<Integer, String> john, ArrayList<String> nyscSet1) {
-        ArrayList<String> bucket2 = new ArrayList<>();
-
-        for (Integer key : john.keySet()) {
-            Collections.shuffle(nyscSet1);
-            bucket2.addAll(nyscSet1.subList(0, 3));
-
-            String output = bucket2.toString().replace("[", "").replace("]", "");
-            System.out.println(john.get(key) + " office days are " + output);
-
-        }
-    }
-
-    @Override
-    public void assignCorpers(Map<Integer, String> corpers, ArrayList<String> nyscSet2) {
-
-        for (Integer key : corpers.keySet()) {
-            ArrayList<String> bucket3 = new ArrayList<>();
-            Collections.shuffle(nyscSet2);
-            bucket3.addAll(nyscSet2.subList(0, 3));
-
-            String output = bucket3.toString().replace("[", "").replace("]", "");
-            System.out.println(corpers.get(key) + " office days are " + output);
-
-        }
-    }
 }
+
+
+
+
+
+
+
+
