@@ -28,8 +28,7 @@ public class Functions_Impl implements Functions {
                     }
                 }
 
-                System.out.println(staff.getFirstname() + " " + staff.getLastname() + " is assigned to work on: "
-                        + assignedDays.get(0) + " and " + assignedDays.get(1));
+                System.out.println(STR."\{staff.getFirstname()} \{staff.getLastname()} is assigned to work on: \{assignedDays.get(0)} and \{assignedDays.get(1)}");
 
             }
      }
@@ -55,8 +54,7 @@ public class Functions_Impl implements Functions {
                     }
                 }
 
-                System.out.println(staff.getFirstname() + " " + staff.getLastname() + " is assigned to work on: "
-                        + assignedDays.get(0) + " ," + assignedDays.get(1) + " and " + assignedDays.get(2) );
+                System.out.println(STR."\{staff.getFirstname()} \{staff.getLastname()} is assigned to work on: \{assignedDays.get(0)} ,\{assignedDays.get(1)} and \{assignedDays.get(2)}");
             }
         }
     }
@@ -87,10 +85,9 @@ public class Functions_Impl implements Functions {
         Staff newStaff = new Staff(id, firstName, lastName, role);
 
         // Add the new staff member to the list
-        staffData.getStaffs().add(newStaff);
+        //staffData.getStaffs().add(newStaff);
 
-        // Write the updated list to the database
-        writer.writeToDatabase();
+        writer.writeToDatabase( newStaff);
 
         System.out.println("New staff member added successfully!");
         }

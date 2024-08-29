@@ -22,7 +22,8 @@ public class ActivEdge_Roster {
         workdays.add("Thursday");
         workdays.add("Friday");
 
-       // System.out.println(write.StaffList);
+        //System.out.println(write.StaffList.get(25));
+
 
         function.StaffAssign(write.StaffList, workdays);
         function.InternAssign(write.StaffList, workdays);

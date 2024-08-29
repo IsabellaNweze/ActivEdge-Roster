@@ -68,6 +68,24 @@ public class DBWriting {
         }
     }
 
+    void writeToDatabase(Staff staff){
+        try {
+            String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
+            preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setInt(1, staff.getId());
+            preparedStatement.setString(2, staff.getFirstname());
+            preparedStatement.setString(3, staff.getLastname());
+            preparedStatement.setString(4, staff.getRole().name());
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                System.out.println("A new staff member was inserted successfully!");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     // 4. Method to read data from the database
     void readFromDatabase() {
         Statement stat = null;
