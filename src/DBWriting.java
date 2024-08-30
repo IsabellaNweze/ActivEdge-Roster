@@ -40,22 +40,33 @@ public class DBWriting {
 
     // 3. Method to write data to the database
     void writeToDatabase() {
+
         try {
-            clearTable(); // Clear the table before inserting new data
+            // Check if there's already data in the database
+            String sqlCheck = "SELECT COUNT(*) FROM STAFF";
+            preparedStatement = con.prepareStatement(sqlCheck);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
 
-            String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
-            preparedStatement = con.prepareStatement(sql);
+            // If the table is empty, proceed with the insertion
+            if (count == 0) {
+                String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
+                preparedStatement = con.prepareStatement(sql);
 
-            for (Staff staff : staffData.getStaffs()) {
-                preparedStatement.setInt(1, staff.getId());
-                preparedStatement.setString(2, staff.getFirstname());
-                preparedStatement.setString(3, staff.getLastname());
-                preparedStatement.setString(4, staff.getRole().name());
-                int rowsInserted = preparedStatement.executeUpdate();
+                for (Staff staff : staffData.getStaffs()) {
+                    preparedStatement.setInt(1, staff.getId());
+                    preparedStatement.setString(2, staff.getFirstname());
+                    preparedStatement.setString(3, staff.getLastname());
+                    preparedStatement.setString(4, staff.getRole().name());
+                    int rowsInserted = preparedStatement.executeUpdate();
 
-                if (rowsInserted > 0) {
-                    System.out.println("A new staff member was inserted successfully!");
+                    if (rowsInserted > 0) {
+                        System.out.println("A new staff member was inserted successfully!");
+                    }
                 }
+            } else {
+                System.out.println("The STAFF table already contains data. No new records were inserted.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,6 +78,7 @@ public class DBWriting {
             }
         }
     }
+
 
     void writeToDatabase(Staff staff){
         try {
