@@ -28,11 +28,10 @@ public class StaffData {
                 staffs.add(new Staff(21, "Ikeyi", " Ijeamaka",Roles.INTERN));
                 staffs.add(new Staff(22, "Anthony"," Obinugwu",Roles.INTERN));
                 staffs.add(new Staff(23, "Praise"," Adepoju",Roles.INTERN));
-                staffs.add(new Staff(24, "Siyaka" ," Promise",Roles.CORPER));
-                staffs.add(new Staff(25, "Kanu","Kennedy",Roles.CORPER));
-                staffs.add(new Staff(26, "Ozeigbe", " John",Roles.CORPER));
-                staffs.add(new Staff(27,  "Godspower", " Amun",Roles.CORPER));
-
+                staffs.add(new Staff(24, "Siyaka" ," Promise",Roles.CORPER, "Thursday"));
+                staffs.add(new Staff(25, "Kanu","Kennedy",Roles.CORPER, "Thursday"));
+                staffs.add(new Staff(26, "Ozeigbe", " John",Roles.CORPER, "Tuesday"));
+                staffs.add(new Staff(27,  "Godspower", " Amun",Roles.CORPER,"Tuesday"));
         }
 
         public List<Staff> getStaffs() {

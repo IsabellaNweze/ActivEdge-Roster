@@ -1,0 +1,9 @@
+
+
+CREATE TABLE staff(
+id INT PRIMARY KEY,
+FirstName VARCHAR(100),
+LastName VARCHAR(100),
+Role VARCHAR(50),
+special_day VARCHAR(50)
+);

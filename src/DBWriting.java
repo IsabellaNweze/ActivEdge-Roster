@@ -12,7 +12,7 @@ public class DBWriting {
     // 1. Method to create a database connection
     void createConnection() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/roster", "root", "isabella");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "Anthony", "2006");
             System.out.println("Database connection successful");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class DBWriting {
         try {
             clearTable(); // Clear the table before inserting new data
 
-            String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role, special_day) VALUES (?, ?, ?, ?, ?)";
             preparedStatement = con.prepareStatement(sql);
 
             for (Staff staff : staffData.getStaffs()) {
@@ -51,6 +51,7 @@ public class DBWriting {
                 preparedStatement.setString(2, staff.getFirstname());
                 preparedStatement.setString(3, staff.getLastname());
                 preparedStatement.setString(4, staff.getRole().name());
+                preparedStatement.setString(5, staff.getSpecialDay());
                 int rowsInserted = preparedStatement.executeUpdate();
 
                 if (rowsInserted > 0) {
@@ -70,7 +71,7 @@ public class DBWriting {
 
     void writeToDatabase(Staff staff){
         try {
-            String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO STAFF (id, FirstName, LastName, Role, special_day) VALUES (?, ?, ?, ?, ?)";
             preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setInt(1, staff.getId());

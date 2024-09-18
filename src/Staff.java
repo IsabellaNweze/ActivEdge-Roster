@@ -5,6 +5,24 @@ public class Staff {
     private String lastname;
     private Roles role;
 
+    public Staff(int id, String firstname, String lastname, Roles role, String specialDay) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
+        this.specialDay = specialDay;
+    }
+
+    public String getSpecialDay() {
+        return specialDay;
+    }
+
+    public void setSpecialDay(String specialDay) {
+        this.specialDay = specialDay;
+    }
+
+    private String specialDay;
+
     public Staff(int id, String firstname, String lastname, Roles role) {
         this.id = id;
         this.firstname = firstname;
@@ -46,6 +64,7 @@ public class Staff {
     public void setRole(Roles role) {
         this.role = role;
     }
+
 }
 
 

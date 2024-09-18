@@ -8,6 +8,7 @@ public interface Functions { // Created an interface to handle functions class
     void StaffAssign(List<Staff> StaffList, List<String> workdays);
 
     void InternAssign(List<Staff> StaffList, List<String> days);
+    void CorperAssign(List<Staff> StaffList, List<String> Days);
 
     void addStaffMember(DBWriting writer);
 

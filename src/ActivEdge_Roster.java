@@ -23,16 +23,14 @@ public class ActivEdge_Roster {
         workdays.add("Thursday");
         workdays.add("Friday");
 
-
-        //System.out.println(write.StaffList.get(25));
-
-
         function.StaffAssign(write.StaffList, workdays);
         function.InternAssign(write.StaffList, workdays);
-         System.out.println("Do you want to enter a new staff member to the database");
+        function.CorperAssign(write.StaffList, workdays);
+
+
+         System.out.println("Do you want to enter a new staff member to the database?");
          String answer = scanner.nextLine();
          if (answer.equalsIgnoreCase("YES")){
-
              function.addStaffMember(write);
          }
          else{
@@ -40,7 +38,6 @@ public class ActivEdge_Roster {
              System.exit(1);
          }
         write.closeConnection();
-
     }
 }
 
